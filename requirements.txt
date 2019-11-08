@@ -1,7 +1,9 @@
 numpy
 scipy
 scikit-learn
-tensorflow-gpu
 pandas
+matplotlib
+seaborn
+tensorflow-gpu
 keras
 xgboost
