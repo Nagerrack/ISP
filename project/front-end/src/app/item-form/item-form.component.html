@@ -1,0 +1,53 @@
+<form ngNativeValidate (ngSubmit)="onSubmit()" #itemForm="ngForm">
+
+    <div class="form-group">
+        <label for="name">Item name</label>
+        <input class="form-check-input" [(ngModel)]="model.name" type="text" class="form-control" id="name" name="name" required />
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea [(ngModel)]="model.description" class="form-control" id="description" name="description"
+            required></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="brandName">Brand name</label>
+        <input [(ngModel)]="model.brandName" class="form-control" id="brandName" name="brandName" required
+            #name="ngModel" />
+    </div>
+
+    <div class="form-group">
+        <label for="category">Category</label>
+        <input [(ngModel)]="model.category" class="form-control" id="category" name="category" required />
+    </div>
+
+    <div class="form-group">
+        <label for="itemCondition">Item condition</label>
+        <select [(ngModel)]="model.itemCondition" class="form-control" id="itemCondition" name="itemCondition" required>
+            <option value="seller">Seller</option>
+            <option value="buyer">Buyer</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="shipping">Shipping payer</label>
+        <select [(ngModel)]="model.shipping" class="form-control" id="shipping" name="shipping" required>
+            <option value="seller">Seller</option>
+            <option value="buyer">Buyer</option>
+        </select>
+    </div>
+
+    <div class="form-group center">
+        <button type="submit" class="btn btn-primary">
+            Predict
+        </button>
+    </div>
+
+    <div class="form-group pred-container">
+        <label class="pred-label">Prediction:</label>
+        <span class="pred-val">0$</span>
+    </div>
+
+
+</form>
