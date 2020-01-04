@@ -14,6 +14,8 @@ class Predictor():
     MODEL_WEIGHTS = 'prediction-server/model/model.h5'
     MODEL_ARCH = 'prediction-server/model/model.json'
     TOKENIZER = 'prediction-server/model/tokenizer.json'
+    BRANDS = 'prediction-server/model/brands.json'
+    CATEGORIES = 'prediction-server/model/categories.json'
 
     MAX_NAME_SEQ = 10
     MAX_ITEM_DESC_SEQ = 75
@@ -21,6 +23,10 @@ class Predictor():
     def __init__(self):
         self.logger = logging.getLogger('predictor.Predictor')
         self.nn = NeuralNetwork()
+        with open(self.BRANDS, 'r') as f:
+            self.brands = np.array(json.load(f))
+        with open(self.CATEGORIES, 'r') as f:
+            self.categories = np.array(json.load(f))
         with open(self.TOKENIZER, 'r') as f:
             self.tokenizer = tokenizer_from_json(f.read())
         self.nn.load([self.MODEL_ARCH, self.MODEL_WEIGHTS])
@@ -43,10 +49,10 @@ class Predictor():
             [data["name"].lower()]), self.MAX_NAME_SEQ)
         description = pad_sequences(self.tokenizer.texts_to_sequences(
             [data["description"].lower()]), self.MAX_ITEM_DESC_SEQ)
-        brand_name = [0]  # TODO
-        category = [0]  # TODO
-        item_condition = [data["itemCondition"]]  # TODO
-        shipping = [data["shipping"]]  # TODO
+        brand_name = np.where(self.brands == data["brandName"])[0]  
+        category = np.where(self.categories == data["category"])[0]  
+        item_condition = [data["itemCondition"]]
+        shipping = [data["shipping"]]
         return {
             'name': name, 
             'item_desc': description, 
