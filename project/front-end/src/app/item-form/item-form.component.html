@@ -1,4 +1,4 @@
-<form ngNativeValidate (ngSubmit)="onSubmit()" #itemForm="ngForm">
+<form ngNativeValidate (ngSubmit)="onSubmit(itemForm.value)" #itemForm="ngForm">
 
     <div class="form-group">
         <label for="name">Item name</label>
@@ -25,16 +25,17 @@
     <div class="form-group">
         <label for="itemCondition">Item condition</label>
         <select [(ngModel)]="model.itemCondition" class="form-control" id="itemCondition" name="itemCondition" required>
-            <option value="seller">Seller</option>
-            <option value="buyer">Buyer</option>
+            <option value="1">New</option>
+            <option value="2">Like new</option>
+            <option value="3">Signs of use</option>
         </select>
     </div>
 
     <div class="form-group">
         <label for="shipping">Shipping payer</label>
         <select [(ngModel)]="model.shipping" class="form-control" id="shipping" name="shipping" required>
-            <option value="seller">Seller</option>
-            <option value="buyer">Buyer</option>
+            <option value="0">Seller</option>
+            <option value="1">Buyer</option>
         </select>
     </div>
 
@@ -46,7 +47,7 @@
 
     <div class="form-group pred-container">
         <label class="pred-label">Prediction:</label>
-        <span class="pred-val">0$</span>
+        <span class="pred-val">{{predictedPrice}}$</span>
     </div>
 
 

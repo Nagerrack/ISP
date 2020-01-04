@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from predictor import Predictor
 from flask_cors import CORS
 
@@ -7,9 +7,12 @@ CORS(app)
 
 predictor = Predictor()
 
-@app.route('/get_prediction/<string:sentence>', methods=['GET'])
-def get_prediction(sentence):
-    return predictor.predict(sentence)
+@app.route('/get_prediction', methods=['POST'])
+def get_prediction():
+    data = request.json
+    price = predictor.predict(data)[0]
+    return jsonify({'price': float(price)})
+
 
 if __name__ == '__main__':
     predictor = Predictor()
