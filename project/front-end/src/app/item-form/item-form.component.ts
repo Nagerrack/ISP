@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ItemData } from '../models/item-data';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import brands_list from '../../assets/brands.json';
+import categories_list from '../../assets/categories.json';
 
 @Component({
   selector: 'app-item-form',
@@ -11,7 +13,9 @@ import { HttpClient } from '@angular/common/http';
 export class ItemFormComponent implements OnInit {
 
   public model = new ItemData();
-  public predictedPrice: number = 0;
+  public predictedPrice = 0;
+  public brands = brands_list;
+  public categories = categories_list;
   constructor(private http: HttpClient) { }
 
   public async onSubmit(data: any) {
